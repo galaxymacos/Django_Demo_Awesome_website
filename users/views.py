@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -7,6 +9,8 @@ from .forms import CustomUserCreationForm
 
 # Create your views here.
 def dashboard(request):
+    print(os.environ.get("EMAIL_HOST_USER"))
+    print(os.environ.get("EMAIL_HOST_PASSWORD"))
     return render(request, "users/dashboard.html")
 
 
