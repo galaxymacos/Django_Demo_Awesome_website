@@ -22,6 +22,8 @@ def register(request):
         # get the collect that we get from the form
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)  # don't save the user yet
+            user.backend = 'django.contrib.auth.backends.ModelBackend'  # not use social auth to create the user
+            user.save()
             login(request, user)
             return redirect(reverse('dashboard'))
